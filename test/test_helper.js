@@ -8,6 +8,7 @@ import chaiJquery from 'chai-jquery'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducers from '../src/reducers'
+import { MemoryRouter, Route, Switch } from 'react-router-dom'
 
 const {document} = (new jsdom.JSDOM('<!doctype html><html><body></body></html>')).window;
 global.document = document;
@@ -20,7 +21,13 @@ chaiJquery(chai, chai.util, $)
 function renderComponent(ComponentClass, props = {}, state ={}) {
   const componentInstance = TestUtils.renderIntoDocument(
     <Provider store={createStore(reducers, state)}>
-      <ComponentClass {...props} />
+      <MemoryRouter>
+        <div>
+          <Switch>
+            <Route path="/" component={ComponentClass} />
+          </Switch>
+        </div>
+      </MemoryRouter>
     </Provider>
   )
 
