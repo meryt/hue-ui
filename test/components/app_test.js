@@ -8,7 +8,12 @@ describe('App', () => {
     component = renderComponent(App)
   })
 
-  it('shows a div with class "hello"', () => {
-    expect(component.find('.hello')).to.exist
+  it('shows a nav bar', () => {
+    expect(component.find('.navbar')).to.exist
   })
+
+  it('shows a list of rooms', () => {
+    expect(component.find('.room-list')).to.exist
+  })
+
 })

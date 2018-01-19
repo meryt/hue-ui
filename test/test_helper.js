@@ -22,11 +22,9 @@ function renderComponent(ComponentClass, props = {}, state ={}) {
   const componentInstance = TestUtils.renderIntoDocument(
     <Provider store={createStore(reducers, state)}>
       <MemoryRouter>
-        <div>
-          <Switch>
-            <Route path="/" component={ComponentClass} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/" component={ComponentClass} />
+        </Switch>
       </MemoryRouter>
     </Provider>
   )
