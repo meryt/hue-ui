@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
+import groupsReducer from './groups'
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  groups: groupsReducer
 })
 
 export default rootReducer
