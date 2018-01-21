@@ -15,5 +15,4 @@ describe('App', () => {
   it('shows a list of rooms', () => {
     expect(component.find('.room-list')).to.exist
   })
-
 })

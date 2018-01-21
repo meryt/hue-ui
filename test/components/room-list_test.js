@@ -8,8 +8,8 @@ describe('RoomList', () => {
     component = renderComponent(RoomList)
   })
 
-  it('is a list group', () => {
-    expect(component).to.have.class('room-list')
+  it('contains a list group', () => {
+    expect(component.find('.room-list')).to.exist
   })
 
 })
