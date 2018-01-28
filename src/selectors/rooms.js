@@ -6,14 +6,23 @@ import { createSelector } from 'reselect'
 // Create select functions to pick off pieces of state we care about
 const groupsSelector = state => state.groups
 
-const getRooms = (groups) => {
-  return _.filter(
-    groups,
-    group => group.type == 'Room'
-  )
+const getGroupsOfType = (groupType) => {
+  return (groups) => {
+    return _.filter(
+      groups,
+      group => group.type == groupType
+    )
+  }
 }
 
-export default createSelector(
+const RoomsSelector = createSelector(
   groupsSelector,
-  getRooms
+  getGroupsOfType('Room')
 )
+
+const LightGroupsSelector = createSelector(
+  groupsSelector,
+  getGroupsOfType('LightGroup')
+)
+
+export { RoomsSelector, LightGroupsSelector }

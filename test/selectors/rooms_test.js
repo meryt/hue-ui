@@ -1,17 +1,17 @@
 import { expect } from '../test_helper'
-import RoomSelector from '../../src/selectors/rooms'
+import { RoomsSelector } from '../../src/selectors/rooms'
 
-describe('RoomSelector', () => {
+describe('RoomsSelector', () => {
   it('returns empty lists for empty groups', () => {
-    expect(RoomSelector({groups: []})).to.deep.equal([])
+    expect(RoomsSelector({groups: []})).to.deep.equal([])
   })
 
   it('returns empty list if no rooms', () => {
-    expect(RoomSelector({groups:[{id: 1, type: 'Object'}]})).to.deep.equal([])
+    expect(RoomsSelector({groups:[{id: 1, type: 'Object'}]})).to.deep.equal([])
   })
 
   it('returns only rooms', () => {
-    expect(RoomSelector({groups: [
+    expect(RoomsSelector({groups: [
       {id: 1, type: 'Object'},
       {id: 2, type: 'Room'}
     ]})).to.deep.equal([{id: 2, type: 'Room'}])

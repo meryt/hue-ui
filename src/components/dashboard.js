@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import RoomList from './room-list'
-import RoomsSelector from '../selectors/rooms'
+import { RoomsSelector } from '../selectors/rooms'
 import * as actions from '../actions'
 
 class Dashboard extends Component {
@@ -13,7 +13,8 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <RoomList type="Room" />
+        <RoomList type="Room" title="Rooms" />
+        <RoomList type="LightGroup" title="Groups" />
       </div>
     )
   }
@@ -26,4 +27,4 @@ function mapStateToProps(state) {
    }
 }
 
-export default connect(mapStateToProps, actions)(RoomList)
+export default connect(null, actions)(Dashboard)

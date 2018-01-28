@@ -5,7 +5,10 @@ describe('RoomList', () => {
   let component
 
   beforeEach(() => {
-    component = renderComponent(RoomList)
+    component = renderComponent(RoomList, {
+      type: 'Room',
+      title: 'Rooms'
+    })
   })
 
   it('contains a list group', () => {

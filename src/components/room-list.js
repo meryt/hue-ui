@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import RoomsSelector from '../selectors/rooms'
+import { RoomsSelector, LightGroupsSelector } from '../selectors/rooms'
 import * as actions from '../actions'
 import ToggleSwitch from './toggle-switch'
 import Badge from './badge'
 
 class RoomList extends Component {
-  componentWillMount() {
-    this.props.fetchGroups()
-    this.props.fetchLights()
-  }
-
   countLitLightsInRoom(room, allLights = {}) {
     return _.filter(room.lights, lightId => (
       typeof(allLights[lightId]) !== 'undefined' && allLights[lightId].state.on)
@@ -39,7 +34,7 @@ class RoomList extends Component {
   render() {
     return (
       <div>
-        <h3>Rooms</h3>
+        <h3>{this.props.title}</h3>
         <ul className="room-list list-group">
           {this.props.rooms.map(this.renderRoom.bind(this))}
         </ul>
@@ -48,9 +43,23 @@ class RoomList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+  let selector
+  switch (ownProps.type) {
+    case 'Room':
+      selector = RoomsSelector
+      break
+    case 'LightGroup':
+      selector = LightGroupsSelector
+      break
+    default:
+      console.log(`Unknown group type ${ownProps.type}; defaulting to Room`)
+      selector = RoomsSelector
+      break
+  }
+
   return {
-    rooms: RoomsSelector(state),
+    rooms: selector(state),
     lights: state.lights
    }
 }
