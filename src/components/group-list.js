@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { RoomsSelector, LightGroupsSelector } from '../selectors/rooms'
+import { RoomsSelector, LightGroupsSelector } from '../selectors/groups'
 import * as actions from '../actions'
 import ToggleSwitch from './toggle-switch'
 import Badge from './badge'
