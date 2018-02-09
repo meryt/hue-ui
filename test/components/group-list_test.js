@@ -1,18 +1,18 @@
 import { renderComponent, expect } from '../test_helper'
-import RoomList from '../../src/components/room-list'
+import GroupList from '../../src/components/group-list'
 
-describe('RoomList', () => {
+describe('GroupList', () => {
   let component
 
   beforeEach(() => {
-    component = renderComponent(RoomList, {
+    component = renderComponent(GroupList, {
       type: 'Room',
       title: 'Rooms'
     })
   })
 
   it('contains a list group', () => {
-    expect(component.find('.room-list')).to.exist
+    expect(component.find('.group-list')).to.exist
   })
 
 })
