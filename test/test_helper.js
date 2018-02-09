@@ -18,6 +18,10 @@ const $ = _$(window)
 
 chaiJquery(chai, chai.util, $)
 
+/**
+ * Use if your component requires a router. It does not seem
+ * possible to pass properties to the component with this version.
+ */
 function renderComponent(ComponentClass, props = {}, state ={}) {
   const componentInstance = TestUtils.renderIntoDocument(
     <Provider store={createStore(reducers, state)}>
@@ -32,6 +36,20 @@ function renderComponent(ComponentClass, props = {}, state ={}) {
   return $(ReactDOM.findDOMNode(componentInstance))
 }
 
+/**
+ * Use if your component does not need a router. It is
+ * possible to pass properties to the component.
+ */
+function renderRouterlessComponent(ComponentClass, props = {}, state = {}) {
+  const componentInstance =  TestUtils.renderIntoDocument(
+    <Provider store={createStore(reducers, state)}>
+      <ComponentClass {...props} />
+    </Provider>
+  );
+
+  return $(ReactDOM.findDOMNode(componentInstance))
+}
+
 $.fn.simulate = function(eventName, value) {
   if (value) {
     this.val(value)
@@ -39,4 +57,4 @@ $.fn.simulate = function(eventName, value) {
   TestUtils.Simulate[eventName](this[0])
 }
 
-export { renderComponent, expect }
+export { renderComponent, renderRouterlessComponent, expect }
