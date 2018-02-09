@@ -6,26 +6,26 @@ import ToggleSwitch from './toggle-switch'
 import Badge from './badge'
 
 class GroupList extends Component {
-  countLitLightsInRoom(room, allLights = {}) {
-    return _.filter(room.lights, lightId => (
+  countLitLightsInGroup(group, allLights = {}) {
+    return _.filter(group.lights, lightId => (
       typeof(allLights[lightId]) !== 'undefined' && allLights[lightId].state.on)
     ).length
   }
 
-  countUnlitLightsInRoom(room, allLights = {}) {
-    return _.filter(room.lights, lightId => (
+  countUnlitLightsInGroup(group, allLights = {}) {
+    return _.filter(group.lights, lightId => (
       typeof(allLights[lightId]) === 'undefined' || !(allLights[lightId].state.on))
     ).length
   }
 
-  renderRoom(room, lights) {
+  renderGroup(group, lights) {
     return (
-      <li className="list-group-item d-flex justify-content-between align-items-center" key={room.id}>
-        {room.name}
+      <li className="list-group-item d-flex justify-content-between align-items-center" key={group.id}>
+        {group.name}
         <div className="light-badge-toggle d-flex align-items-center">
-          <Badge suppressible="true" colorClass="warning" count={this.countLitLightsInRoom(room, this.props.lights)} />
-          <Badge suppressible="false" colorClass="dark" count={this.countUnlitLightsInRoom(room, this.props.lights)} />
-          <ToggleSwitch checked={room.state.any_on ? 'true' : 'false'} />
+          <Badge suppressible="true" colorClass="warning" count={this.countLitLightsInGroup(group, this.props.lights)} />
+          <Badge suppressible="false" colorClass="dark" count={this.countUnlitLightsInGroup(group, this.props.lights)} />
+          <ToggleSwitch checked={group.state.any_on ? 'true' : 'false'} />
         </div>
       </li>
     )
@@ -36,7 +36,7 @@ class GroupList extends Component {
       <div>
         <h3>{this.props.title}</h3>
         <ul className="group-list list-group">
-          {this.props.rooms.map(this.renderRoom.bind(this))}
+          {this.props.groups.map(this.renderGroup.bind(this))}
         </ul>
       </div>
     )
@@ -59,7 +59,8 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    rooms: selector(state),
+    // Filter main groups list to include only groups of a particular type
+    groups: selector(state),
     lights: state.lights
    }
 }
