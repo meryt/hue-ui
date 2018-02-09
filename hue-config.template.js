@@ -1,2 +1,2 @@
-exports.hub = '192.168.55.55';
-exports.apikey = 'abc123';
+exports.HUB = '192.168.55.55';
+exports.API_KEY = 'abc123';
