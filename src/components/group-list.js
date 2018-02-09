@@ -4,6 +4,7 @@ import { RoomsSelector, LightGroupsSelector } from '../selectors/groups'
 import * as actions from '../actions'
 import ToggleSwitch from './toggle-switch'
 import Badge from './badge'
+import GroupWithLights from './group-with-lights'
 
 class GroupList extends Component {
   countLitLightsInGroup(group, allLights = {}) {
@@ -20,14 +21,16 @@ class GroupList extends Component {
 
   renderGroup(group, lights) {
     return (
-      <li className="list-group-item d-flex justify-content-between align-items-center" key={group.id}>
-        {group.name}
-        <div className="light-badge-toggle d-flex align-items-center">
-          <Badge suppressible="true" colorClass="warning" count={this.countLitLightsInGroup(group, this.props.lights)} />
-          <Badge suppressible="false" colorClass="dark" count={this.countUnlitLightsInGroup(group, this.props.lights)} />
-          <ToggleSwitch checked={group.state.any_on ? 'true' : 'false'} />
+      <div className="card" key={group.id}>
+        <div className="card-header list-group-item d-flex justify-content-between align-items-center">
+          {group.name}
+          <div className="light-badge-toggle d-flex align-items-center">
+            <Badge suppressible="true" colorClass="warning" count={this.countLitLightsInGroup(group, this.props.lights)} />
+            <Badge suppressible="false" colorClass="dark" count={this.countUnlitLightsInGroup(group, this.props.lights)} />
+            <ToggleSwitch checked={group.state.any_on ? 'true' : 'false'} />
+          </div>
         </div>
-      </li>
+      </div>
     )
   }
 
@@ -35,9 +38,9 @@ class GroupList extends Component {
     return (
       <div>
         <h3>{this.props.title}</h3>
-        <ul className="group-list list-group">
+        <div className="group-list list-group">
           {this.props.groups.map(this.renderGroup.bind(this))}
-        </ul>
+        </div>
       </div>
     )
   }

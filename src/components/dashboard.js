@@ -12,9 +12,13 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div className="dashboard">
-        <GroupList type="Room" title="Rooms" />
-        <GroupList type="LightGroup" title="Groups" />
+      <div className="dashboard row">
+        <div className="col-6">
+          <GroupList type="Room" title="Rooms" />
+        </div>
+        <div className="col-6">
+          <GroupList type="LightGroup" title="Groups" />
+        </div>
       </div>
     )
   }
