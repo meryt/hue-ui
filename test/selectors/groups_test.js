@@ -1,5 +1,5 @@
 import { expect } from '../test_helper'
-import { RoomsSelector } from '../../src/selectors/rooms'
+import { RoomsSelector } from '../../src/selectors/groups'
 
 describe('RoomsSelector', () => {
   it('returns empty lists for empty groups', () => {

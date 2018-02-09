@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GroupList from './group-list'
-import { RoomsSelector } from '../selectors/rooms'
+
 import * as actions from '../actions'
 
 class Dashboard extends Component {
@@ -20,11 +20,5 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    rooms: RoomsSelector(state),
-    lights: state.lights
-   }
-}
 
 export default connect(null, actions)(Dashboard)
