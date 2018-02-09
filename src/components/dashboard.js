@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import RoomList from './room-list'
+import GroupList from './group-list'
 import { RoomsSelector } from '../selectors/rooms'
 import * as actions from '../actions'
 
@@ -13,8 +13,8 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <RoomList type="Room" title="Rooms" />
-        <RoomList type="LightGroup" title="Groups" />
+        <GroupList type="Room" title="Rooms" />
+        <GroupList type="LightGroup" title="Groups" />
       </div>
     )
   }

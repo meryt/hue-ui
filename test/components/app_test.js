@@ -12,7 +12,7 @@ describe('App', () => {
     expect(component.find('.navbar')).to.exist
   })
 
-  it('shows a list of rooms', () => {
-    expect(component.find('.room-list')).to.exist
+  it('shows a list of groups', () => {
+    expect(component.find('.group-list')).to.exist
   })
 })

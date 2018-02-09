@@ -5,7 +5,7 @@ import * as actions from '../actions'
 import ToggleSwitch from './toggle-switch'
 import Badge from './badge'
 
-class RoomList extends Component {
+class GroupList extends Component {
   countLitLightsInRoom(room, allLights = {}) {
     return _.filter(room.lights, lightId => (
       typeof(allLights[lightId]) !== 'undefined' && allLights[lightId].state.on)
@@ -35,7 +35,7 @@ class RoomList extends Component {
     return (
       <div>
         <h3>{this.props.title}</h3>
-        <ul className="room-list list-group">
+        <ul className="group-list list-group">
           {this.props.rooms.map(this.renderRoom.bind(this))}
         </ul>
       </div>
@@ -64,4 +64,4 @@ function mapStateToProps(state, ownProps) {
    }
 }
 
-export default connect(mapStateToProps, actions)(RoomList)
+export default connect(mapStateToProps, actions)(GroupList)
