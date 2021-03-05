@@ -19,16 +19,52 @@ class GroupList extends Component {
     ).length
   }
 
-  renderGroup(group, lights) {
+  toggleGroup(isTurningOn, groupId) {
+    actions.toggleGroup(groupId, isTurningOn)
+  }
+
+  toggleLight(isTurningOn, lightId) {
+    console.log('Light ' + lightId + ' will turn ' + (isTurningOn ? 'on' : 'off'))
+    actions.toggleLight(lightId, isTurningOn)
+  }
+
+  clickCard(e) {
+    //e.preventDefault();
+    var card = e.target
+    console.log('Clicked group ' + card.id.replace('card-group-', ''))
+  }
+
+  renderLightRow(lightId) {
+    let light = this.props.lights[lightId]
+    if (!light) return
     return (
-      <div className="card" key={group.id}>
-        <div className="card-header list-group-item d-flex justify-content-between align-items-center">
+      <li key={'light-' + lightId} className="list-group-item">
+        { light.name }
+        <div className="light-badge-toggle d-flex align-items-center">
+          <ToggleSwitch checked={light.state.on ? 'true' : 'false'} onChange={this.toggleLight} itemId={lightId} />
+        </div>
+      </li>
+    )
+  }
+
+  renderGroup(group) {
+    if (!group) {
+      return
+    }
+    return (
+      <div className="card" key={ 'group-' + group.id}>
+        <div className="card-header list-group-item d-flex justify-content-between align-items-center" id={ 'card-group-' + group.id } onClick={this.clickCard}>
           {group.name}
           <div className="light-badge-toggle d-flex align-items-center">
             <Badge suppressible="true" colorClass="warning" count={this.countLitLightsInGroup(group, this.props.lights)} />
             <Badge suppressible="false" colorClass="dark" count={this.countUnlitLightsInGroup(group, this.props.lights)} />
-            <ToggleSwitch checked={group.state.any_on ? 'true' : 'false'} />
+            <ToggleSwitch checked={group.state.any_on ? 'true' : 'false'} onChange={this.toggleGroup} itemId={group.id} />
           </div>
+        </div>
+        <div>
+          <ul className="list-group list-group-flush">
+            { group.lights.map(this.renderLightRow.bind(this)) }
+          </ul>
         </div>
       </div>
     )

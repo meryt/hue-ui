@@ -1,2 +1,4 @@
 export const FETCH_GROUPS = 'FETCH_GROUPS'
 export const FETCH_LIGHTS = 'FETCH_LIGHTS'
+export const TOGGLE_GROUP = 'TOGGLE_GROUP'
+export const TOGGLE_LIGHT = 'TOGGLE_LIGHT'

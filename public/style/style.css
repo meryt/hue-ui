@@ -6,6 +6,10 @@
   margin-right: 1em;
 }
 
+.card ul li {
+  font-size: smaller;
+}
+
 /* BEGIN TOGGLE SWITCH */
 
 /* The switch - the box around the slider */
