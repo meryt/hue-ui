@@ -29,13 +29,11 @@ export function fetchLights() {
 export function toggleGroup(groupId, turnOn) {
   console.log('PUT group on/off')
   axios.put(`${HUB_URL}/groups/${groupId}/action`, {'on': turnOn})
-  /*
   return {
     type: TOGGLE_GROUP,
     payload: axios.get(`${HUB_URL}/groups`)
   }
-  */
-  return fetchGroups()
+  //return fetchGroups()
 }
 
 export function toggleLight(lightId, turnOn) {

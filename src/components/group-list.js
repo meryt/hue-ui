@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { RoomsSelector, LightGroupsSelector } from '../selectors/groups'
-import * as actions from '../actions'
+import { toggleGroup, toggleLight, fetchGroups, fetchLights } from '../actions'
 import ToggleSwitch from './toggle-switch'
 import Badge from './badge'
 import GroupWithLights from './group-with-lights'
@@ -20,12 +20,12 @@ class GroupList extends Component {
   }
 
   toggleGroup(isTurningOn, groupId) {
-    actions.toggleGroup(groupId, isTurningOn)
+    this.props.toggleGroup(groupId, isTurningOn)
   }
 
   toggleLight(isTurningOn, lightId) {
     console.log('Light ' + lightId + ' will turn ' + (isTurningOn ? 'on' : 'off'))
-    actions.toggleLight(lightId, isTurningOn)
+    this.props.toggleLight(lightId, isTurningOn)
   }
 
   clickCard(e) {
@@ -41,7 +41,7 @@ class GroupList extends Component {
       <li key={'light-' + lightId} className="list-group-item">
         { light.name }
         <div className="light-badge-toggle d-flex align-items-center">
-          <ToggleSwitch checked={light.state.on ? 'true' : 'false'} onChange={this.toggleLight} itemId={lightId} />
+          <ToggleSwitch checked={light.state.on ? 'true' : 'false'} onChange={this.toggleLight.bind(this)} itemId={lightId} />
         </div>
       </li>
     )
@@ -58,7 +58,7 @@ class GroupList extends Component {
           <div className="light-badge-toggle d-flex align-items-center">
             <Badge suppressible="true" colorClass="warning" count={this.countLitLightsInGroup(group, this.props.lights)} />
             <Badge suppressible="false" colorClass="dark" count={this.countUnlitLightsInGroup(group, this.props.lights)} />
-            <ToggleSwitch checked={group.state.any_on ? 'true' : 'false'} onChange={this.toggleGroup} itemId={group.id} />
+            <ToggleSwitch checked={group.state.any_on ? 'true' : 'false'} onChange={this.toggleGroup.bind(this)} itemId={group.id} />
           </div>
         </div>
         <div>
@@ -104,4 +104,17 @@ function mapStateToProps(state, ownProps) {
    }
 }
 
-export default connect(mapStateToProps, actions)(GroupList)
+const mapDispatchToProps = (dispatch) => ({
+    toggleGroup: (groupId, isTurningOn) => {
+      dispatch(toggleGroup(groupId, isTurningOn))
+      dispatch(fetchLights())
+      dispatch(fetchGroups())
+    },
+    toggleLight: (lightId, isTurningOn) => {
+      dispatch(toggleLight(lightId, isTurningOn))
+      dispatch(fetchGroups())
+      dispatch(fetchLights())
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(GroupList)

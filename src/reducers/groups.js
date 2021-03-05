@@ -15,7 +15,7 @@ export default function(state = [], action) {
 
       let payload = _.values(payloadWithKeys)
 
-      return [ ...state, ...payload ]
+      return [ ...payload ]
     default:
       return state
   }
