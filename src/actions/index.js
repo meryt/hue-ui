@@ -33,7 +33,6 @@ export function toggleGroup(groupId, turnOn) {
     type: TOGGLE_GROUP,
     payload: axios.get(`${HUB_URL}/groups`)
   }
-  //return fetchGroups()
 }
 
 export function toggleLight(lightId, turnOn) {

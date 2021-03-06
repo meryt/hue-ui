@@ -22,6 +22,10 @@
   color: #eee;
 }
 
+.lightlist-collapsed {
+  display: none;
+}
+
 /* BEGIN TOGGLE SWITCH */
 
 /* The switch - the box around the slider */

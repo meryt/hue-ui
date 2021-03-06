@@ -7,6 +7,26 @@ import Badge from './badge'
 import GroupWithLights from './group-with-lights'
 
 class GroupList extends Component {
+
+  constructor(props) {
+      super(props)
+      console.log('In constructor')
+      this.expandGroup = this.expandGroup.bind(this)
+      this.state = {
+        expandedGroups: {}
+      }
+  }
+
+  expandGroup(groupId) {
+    console.log('Toggling group ' + groupId)
+    let expandedState = this.state.expandedGroups
+    let stateOfGroup = (expandedState[groupId] || false)
+    this.setState({
+        expandedGroups: {...state.expandedGroups, groupId: stateOfGroup}
+    })
+  }
+
+
   countLitLightsInGroup(group, allLights = {}) {
     return _.filter(group.lights, lightId => (
       typeof(allLights[lightId]) !== 'undefined' && allLights[lightId].state.on)
@@ -24,14 +44,21 @@ class GroupList extends Component {
   }
 
   toggleLight(isTurningOn, lightId) {
-    console.log('Light ' + lightId + ' will turn ' + (isTurningOn ? 'on' : 'off'))
     this.props.toggleLight(lightId, isTurningOn)
   }
 
   clickCard(e) {
     //e.preventDefault();
     var card = e.target
-    console.log('Clicked group ' + card.id.replace('card-group-', ''))
+    let groupId = card.id.replace('card-group-', '')
+
+    let expandedState = this.props.expandedGroups
+    let stateOfGroup = (expandedState[groupId] || false)
+    expandedState[groupId] = !stateOfGroup
+    console.log(this.state.expandedGroups)
+    this.setState({
+        expandedGroups: expandedState
+    })
   }
 
   renderLightRow(lightId) {
@@ -51,11 +78,14 @@ class GroupList extends Component {
     if (!group) {
       return
     }
+
+    let isExpanded = this.props.expandedGroups[group.id] || false;
+
     return (
       <div className="card" key={ 'group-' + group.id}>
         <div className="card-header list-group-item d-flex justify-content-between align-items-center"
             id={ 'card-group-' + group.id }
-            onClick={this.clickCard}>
+            onClick={this.clickCard.bind(this)}>
           {group.name}
           <div className="light-badge-toggle d-flex align-items-center">
             <Badge suppressible="true" colorClass="warning" count={this.countLitLightsInGroup(group, this.props.lights)} />
@@ -63,7 +93,7 @@ class GroupList extends Component {
             <ToggleSwitch checked={group.state.any_on ? 'true' : 'false'} onChange={this.toggleGroup.bind(this)} itemId={group.id} />
           </div>
         </div>
-        <div>
+        <div id={'lightlist-group-' + group.id} className={ isExpanded ? 'lightlist-expanded' : 'lightlist-collapsed' }>
           <ul className="list-group list-group-flush">
             { group.lights.map(this.renderLightRow.bind(this)) }
           </ul>
@@ -102,7 +132,8 @@ function mapStateToProps(state, ownProps) {
   return {
     // Filter main groups list to include only groups of a particular type
     groups: selector(state),
-    lights: state.lights
+    lights: state.lights,
+    expandedGroups: state.expandedGroups || {}
    }
 }
 

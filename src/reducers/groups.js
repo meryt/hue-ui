@@ -13,9 +13,6 @@ export default function(state = {}, action) {
         return {id: key, ...val}
       })
 
-      let payload = _.values(payloadWithKeys)
-
-      //return [ ...payload ]
       return { ...state, ...payloadWithKeys }
     default:
       return state
