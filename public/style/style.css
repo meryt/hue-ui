@@ -7,7 +7,7 @@
 }
 
 .card ul li {
-  font-size: smaller;
+  font-size: 0.8em;
 }
 
 .card ul li.list-group-item {
@@ -18,14 +18,18 @@
   border: 0;
 }
 
+.card-header {
+  color: #eee;
+}
+
 /* BEGIN TOGGLE SWITCH */
 
 /* The switch - the box around the slider */
 .switch {
  position: relative;
  display: inline-block;
- width: 60px;
- height: 34px;
+ width: 3.75em;
+ height: 2.125em;
  margin-bottom: 0;
 }
 
@@ -48,10 +52,10 @@
 .slider:before {
  position: absolute;
  content: "";
- height: 26px;
- width: 26px;
- left: 4px;
- bottom: 4px;
+ height: 1.625em;
+ width: 1.625em;
+ left: 0.25em;
+ bottom: 0.25em;
  background-color: white;
  -webkit-transition: .4s;
  transition: .4s;
@@ -66,14 +70,14 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
- -webkit-transform: translateX(26px);
- -ms-transform: translateX(26px);
- transform: translateX(26px);
+ -webkit-transform: translateX(1.625em);
+ -ms-transform: translateX(1.625em);
+ transform: translateX(1.625em);
 }
 
 /* Rounded sliders */
 .slider.round {
- border-radius: 34px;
+ border-radius: 2.125em;
 }
 
 .slider.round:before {

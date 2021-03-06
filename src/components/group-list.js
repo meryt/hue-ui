@@ -38,9 +38,9 @@ class GroupList extends Component {
     let light = this.props.lights[lightId]
     if (!light) return
     return (
-      <li key={'light-' + lightId} className="list-group-item">
+      <li key={'light-' + lightId} className="list-group-item d-flex justify-content-between align-items-center">
         { light.name }
-        <div className="light-badge-toggle d-flex align-items-center">
+        <div className="light-badge-toggle">
           <ToggleSwitch checked={light.state.on ? 'true' : 'false'} onChange={this.toggleLight.bind(this)} itemId={lightId} />
         </div>
       </li>
@@ -53,7 +53,9 @@ class GroupList extends Component {
     }
     return (
       <div className="card" key={ 'group-' + group.id}>
-        <div className="card-header list-group-item d-flex justify-content-between align-items-center" id={ 'card-group-' + group.id } onClick={this.clickCard}>
+        <div className="card-header list-group-item d-flex justify-content-between align-items-center"
+            id={ 'card-group-' + group.id }
+            onClick={this.clickCard}>
           {group.name}
           <div className="light-badge-toggle d-flex align-items-center">
             <Badge suppressible="true" colorClass="warning" count={this.countLitLightsInGroup(group, this.props.lights)} />
