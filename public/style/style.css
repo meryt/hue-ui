@@ -10,6 +10,14 @@
   font-size: smaller;
 }
 
+.card ul li.list-group-item {
+  border: 0;
+}
+
+.card .list-group-item {
+  border: 0;
+}
+
 /* BEGIN TOGGLE SWITCH */
 
 /* The switch - the box around the slider */

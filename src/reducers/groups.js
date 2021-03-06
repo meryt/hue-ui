@@ -4,7 +4,7 @@ import {
   FETCH_GROUPS
 } from '../actions/types'
 
-export default function(state = [], action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case FETCH_GROUPS:
       let rawPayload = action.payload.data
@@ -15,7 +15,8 @@ export default function(state = [], action) {
 
       let payload = _.values(payloadWithKeys)
 
-      return [ ...payload ]
+      //return [ ...payload ]
+      return { ...state, ...payloadWithKeys }
     default:
       return state
   }
