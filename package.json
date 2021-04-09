@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/meryt/hue-ui#readme",
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "babel-preset-stage-1": "^6.24.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
